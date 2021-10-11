@@ -11,9 +11,17 @@ This script requires the helper names (for proper identification) and the endpoi
 ### Example Command
 
 ```buildoutcfg
-python training/sklearn_trainer_mlark.py --helpernames helpername0 helpername1 --helperendpoints http://localhost:7071/api/GradientHelper http://localhost:7072/api/GradientHelper
+python mlark_training/sklearn_trainer_mlark.py --helpernames helpername0 helpername1 --helperendpoints http://localhost:7071/api/GradientHelper http://localhost:7072/api/GradientHelper
 ```
 
 
 ### Dependencies
 
+torch==1.9.0
+protobuf
+torchvision==0.10.0
+numpy
+pillow
+scikit-learn==0.24.2
+requests
+onnx==1.10.1
