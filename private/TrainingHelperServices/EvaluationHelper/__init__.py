@@ -1,9 +1,8 @@
 import logging
-import losscompute
-import utils
 
 import azure.functions as func
 
+from BaseHelper import utils, losscompute
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
@@ -27,18 +26,17 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         if input_data is None and model_set is None:
             raise ValueError('Helper parsing failed.')
 
-        output_gradients = {}
+        output_losses = {}
         for model_name in model_set:
             model = model_set[model_name]['model']
             lossfunction = model_set[model_name]['loss']
-            gradients = losscompute.compute_private_losses(input_data, model, model_name, lossfunction, privacy_settings)
-            if gradients is None:
-                # Typically this means not enough gradients were sent for a model to surpass the k-anonymity threshold
-                output_gradients[model_name] = {}
+            losses = losscompute.compute_private_losses(input_data, model, model_name, lossfunction, privacy_settings)
+            if losses is None:
+                output_losses[model_name] = {}
             else:
-                output_gradients[model_name] = gradients
+                output_losses[model_name] = losses
 
-        output_payload = utils.create_return_payload(output_gradients, helpername)
+        output_payload = utils.create_eval_return_payload(output_losses, helpername)
         return func.HttpResponse(output_payload)
     except ValueError:
         pass

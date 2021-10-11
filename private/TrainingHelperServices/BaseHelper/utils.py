@@ -1,12 +1,12 @@
 import json
+import logging
+
 import torch
 import onnx
-import logging
-import os
 import base64
 import numpy as np
 
-import FeedForwardFromONNX
+from . import FeedForwardFromONNX
 
 
 class PayloadEncoder(json.JSONEncoder):
@@ -79,12 +79,10 @@ def parse_singleton_loss(loss_dict):
         loss = torch.nn.BCELoss(**loss_kwargs)
     elif loss_name == "MSELoss":
         loss = torch.nn.MSELoss(**loss_kwargs)
-    elif loss_name == "CrossEntropyLoss":
-        loss = torch.nn.CrossEntropyLoss(**loss_kwargs)
     else:
         raise ValueError("Your loss, " + str(loss_name) + " is not supported. " +
-                         "Enter one of BinaryCrossEntropy or " +
-                         "Mean Squared Error.")
+                         "Enter one of BCELoss or " +
+                         "MSELoss.")
     return loss
 
 def get_loss(loss_dict):
