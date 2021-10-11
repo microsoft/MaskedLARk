@@ -6,4 +6,4 @@ The MaskedLARkRequests package will soon be available for installation from PyPI
 
 ## Documentation
 
-Documentation for the requests sent and received by this package can be found at https://github.com/microsoft/MaskedLARk/docs/api/README.md, and a demonstration of training using this package can be found in https://github.com/microsoft/MaskedLARk/src/demo/
+Documentation for the requests sent and received by this package can be found at https://github.com/microsoft/MaskedLARk/docs/api/README.md, and a demonstration of training using this package can be found in https://github.com/microsoft/MaskedLARk/examples/PytorchTraining/
