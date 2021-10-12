@@ -1,12 +1,10 @@
 import logging
-import gradcompute
-import utils
-import os
+import os 
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 import azure.functions as func
 
-import os 
-os.environ['KMP_DUPLICATE_LIB_OK']='True'
+from BaseHelper import utils, gradcompute
 
 
 def main(req: func.HttpRequest) -> func.HttpResponse:
